@@ -466,12 +466,11 @@ export default function Home() {
               </div>
             </div>*/}
             </div>
-
-            <div className='border-t border-white/10 pt-8 text-center text-gray-400'>
-              <p>
-                &copy; {new Date().getFullYear()} NomadGym. All rights reserved.
-              </p>
-            </div>
+          </div>
+          <div className='border-t border-white/10 pt-8 text-center text-gray-400'>
+            <p>
+              &copy; {new Date().getFullYear()} NomadGym. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
