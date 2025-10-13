@@ -74,7 +74,7 @@ export default function Home() {
         <div className='w-full mx-auto px-4 sm:px-6 lg:px-8 py-4'>
           <div className='flex items-center justify-between'>
             <Image
-              src='/logo-full.png'
+              src='/logo-full1.png'
               alt='NomadGym Logo'
               width={350}
               height={150}
@@ -360,7 +360,10 @@ export default function Home() {
                 />
                 <button
                   type='submit'
-                  disabled={form.formState.isSubmitting || !form.watch('acceptedPrivacy')}
+                  disabled={
+                    form.formState.isSubmitting ||
+                    !form.watch('acceptedPrivacy')
+                  }
                   className='px-8 py-4 bg-gradient-to-r from-prim to-[#FF8555] text-white font-semibold rounded-md hover:shadow-lg hover:shadow-prim/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 disabled:hover:shadow-none cursor-pointer'>
                   Join Waitlist
                   <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
