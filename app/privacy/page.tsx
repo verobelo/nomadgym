@@ -9,11 +9,20 @@ export default function PrivacyPolicy() {
           <div className='flex items-center justify-between'>
             <Link href='/'>
               <Image
-                src='/logo-full.png'
+                src='/logo-full1.png'
                 alt='NomadGym Logo'
                 width={350}
                 height={150}
-                className='h-14 object-cover cursor-pointer'
+                className='hidden md:block h-14 object-cover'
+                priority
+              />
+
+              <Image
+                src='/logo-small.png'
+                alt='NomadGym Logo'
+                width={350}
+                height={150}
+                className='md:hidden h-12 w-12 object-cover'
                 priority
               />
             </Link>
@@ -40,10 +49,11 @@ export default function PrivacyPolicy() {
               1. Introduction
             </h2>
             <p className='text-gray-700 mb-4'>
-              Welcome to NomadGym ("we," "our," or "us"). We are committed to
-              protecting your personal data and respecting your privacy rights
-              in accordance with the General Data Protection Regulation (GDPR)
-              and other applicable data protection laws.
+              Welcome to NomadGym (&quot;we&quot;, &quot;our&quot;, or
+              &quot;us&quot;). We are committed to protecting your personal data
+              and respecting your privacy rights in accordance with the General
+              Data Protection Regulation (GDPR) and other applicable data
+              protection laws.
             </p>
             <p className='text-gray-700 mb-4'>
               This Privacy Policy explains how we collect, use, store, and
@@ -135,9 +145,7 @@ export default function PrivacyPolicy() {
                 (only with your consent)
               </li>
               <li>To respond to your inquiries and provide customer support</li>
-              <li>
-                To improve our website, services, and user experience
-              </li>
+              <li>To improve our website, services, and user experience</li>
               <li>To analyze usage patterns and website performance</li>
               <li>To comply with legal obligations and prevent fraud</li>
             </ul>
@@ -156,8 +164,8 @@ export default function PrivacyPolicy() {
             </p>
             <p className='text-gray-700 mb-4'>
               <strong>Security Measures:</strong> We implement appropriate
-              technical and organizational measures to protect your personal data
-              against unauthorized access, alteration, disclosure, or
+              technical and organizational measures to protect your personal
+              data against unauthorized access, alteration, disclosure, or
               destruction. These include:
             </p>
             <ul className='list-disc pl-6 space-y-2 text-gray-700 mb-4'>
@@ -233,7 +241,9 @@ export default function PrivacyPolicy() {
               EEA, we ensure appropriate safeguards are in place, such as:
             </p>
             <ul className='list-disc pl-6 space-y-2 text-gray-700 mb-4'>
-              <li>Standard Contractual Clauses approved by the European Commission</li>
+              <li>
+                Standard Contractual Clauses approved by the European Commission
+              </li>
               <li>
                 Transfer to countries with an adequacy decision from the EU
               </li>
@@ -258,7 +268,9 @@ export default function PrivacyPolicy() {
                 inaccurate or incomplete data
               </li>
               <li>
-                <strong>Right to Erasure ("Right to be Forgotten"):</strong>{' '}
+                <strong>
+                  Right to Erasure (&quot;Right to be Forgotten&quot;):
+                </strong>{' '}
                 Request deletion of your personal data
               </li>
               <li>
@@ -327,7 +339,7 @@ export default function PrivacyPolicy() {
 
           <section className='mb-8'>
             <h2 className='text-2xl font-bold text-sec mb-4'>
-              12. Children's Privacy
+              12. Children&apos;s Privacy
             </h2>
             <p className='text-gray-700 mb-4'>
               Our services are not directed to individuals under the age of 16.
@@ -344,8 +356,8 @@ export default function PrivacyPolicy() {
             <p className='text-gray-700 mb-4'>
               Our website may contain links to third-party websites. We are not
               responsible for the privacy practices of these external sites. We
-              encourage you to review their privacy policies before providing any
-              personal information.
+              encourage you to review their privacy policies before providing
+              any personal information.
             </p>
           </section>
 
@@ -360,7 +372,10 @@ export default function PrivacyPolicy() {
             </p>
             <ul className='list-disc pl-6 space-y-2 text-gray-700 mb-4'>
               <li>Posting the updated policy on our website</li>
-              <li>Updating the "Last updated" date at the top of this page</li>
+              <li>
+                Updating the &quot;Last updated&quot; date at the top of this
+                page
+              </li>
               <li>
                 Sending an email notification (if you are on our waitlist)
               </li>
@@ -376,11 +391,13 @@ export default function PrivacyPolicy() {
             </h2>
             <p className='text-gray-700 mb-4'>
               If you have concerns about how we handle your personal data, you
-              have the right to lodge a complaint with your local data protection
-              authority.
+              have the right to lodge a complaint with your local data
+              protection authority.
             </p>
             <p className='text-gray-700 mb-4'>
-              <strong>Spain - Agencia Española de Protección de Datos (AEPD):</strong>
+              <strong>
+                Spain - Agencia Española de Protección de Datos (AEPD):
+              </strong>
               <br />
               Website:{' '}
               <a
@@ -394,9 +411,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section className='mb-8'>
-            <h2 className='text-2xl font-bold text-sec mb-4'>
-              16. Contact Us
-            </h2>
+            <h2 className='text-2xl font-bold text-sec mb-4'>16. Contact Us</h2>
             <p className='text-gray-700 mb-4'>
               If you have any questions, concerns, or requests regarding this
               Privacy Policy or our data practices, please contact us:
