@@ -387,7 +387,7 @@ export default function Home() {
                         I agree to receive information about NomadGym launch and
                         accept the{' '}
                         <Link
-                          href='/privacy-policy'
+                          href='/privacy'
                           className='text-prim hover:underline font-medium'>
                           Privacy Policy
                         </Link>
