@@ -78,12 +78,21 @@ export default function Home() {
               alt='NomadGym Logo'
               width={350}
               height={150}
-              className='h-14 object-cover'
+              className='hidden md:block h-14 object-cover'
               priority
             />
-            <div className='inline-flex items-center gap-2 bg-prim/10 border border-acc/20 rounded-sm px-4 py-2 mb-8'>
+
+            <Image
+              src='/logo-small.png'
+              alt='NomadGym Logo'
+              width={350}
+              height={150}
+              className='md:hidden h-12 w-12 object-cover'
+              priority
+            />
+            <div className='inline-flex items-center gap-2 bg-prim/10 border border-acc/20 rounded-sm px-4 py-2'>
               <Sparkles className='w-4 h-4 text-acc' />
-              <span className='text-prim text-base font-medium'>
+              <span className='text-prim text-sm md:text-base font-medium'>
                 Coming Soon to Spain
               </span>
             </div>
@@ -136,18 +145,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id='how-it-works' className='py-24 bg-white'>
+      <section id='how-it-works' className='py-16 sm:py-24 bg-white'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='text-center mb-16'>
-            <h2 className='text-4xl sm:text-5xl font-bold text-sec mb-4'>
+          <div className='text-center mb-12 sm:mb-16'>
+            <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-sec mb-3 sm:mb-4'>
               How It Works
             </h2>
-            <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
+            <p className='text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4'>
               Getting started is simple. Train anywhere in just 3 easy steps.
             </p>
           </div>
 
-          <div className='grid md:grid-cols-3 gap-8 lg:gap-12'>
+          <div className='grid md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12'>
             {[
               {
                 icon: CreditCard,
@@ -172,19 +181,19 @@ export default function Home() {
               },
             ].map((item, index) => (
               <div key={index} className='relative group'>
-                <div className='bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 hover:border-prim/30 transition-all duration-300 hover:shadow-xl hover:-translate-y-2'>
-                  <div className='absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-prim to-acc rounded-full flex items-center justify-center text-white font-bold shadow-lg'>
+                <div className='bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8 pt-8 sm:pt-8 rounded-2xl border border-gray-100 hover:border-prim/30 transition-all duration-300 hover:shadow-xl md:hover:-translate-y-2'>
+                  <div className='absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-prim to-acc rounded-full flex items-center justify-center text-white text-sm sm:text-base font-bold shadow-lg'>
                     {item.step}
                   </div>
 
-                  <div className='mb-6 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-prim/10 to-acc/10 rounded-2xl group-hover:scale-110 transition-transform duration-300'>
-                    <item.icon className='w-8 h-8 text-prim' />
+                  <div className='mb-4 sm:mb-6 inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-prim/10 to-acc/10 rounded-2xl group-hover:scale-110 transition-transform duration-300'>
+                    <item.icon className='w-7 h-7 sm:w-8 sm:h-8 text-prim' />
                   </div>
 
-                  <h3 className='text-2xl font-bold text-sec mb-3'>
+                  <h3 className='text-xl sm:text-2xl font-bold text-sec mb-2 sm:mb-3'>
                     {item.title}
                   </h3>
-                  <p className='text-gray-600 leading-relaxed'>
+                  <p className='text-sm sm:text-base text-gray-600 leading-relaxed'>
                     {item.description}
                   </p>
                 </div>
