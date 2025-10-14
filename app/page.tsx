@@ -12,6 +12,7 @@ import {
   Mail,
   Check,
   ArrowRight,
+  AlertCircle,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,18 +29,20 @@ import {
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { waitlistFormSchema } from '@/lib/validation';
+import { addToWaitlist } from '@/lib/actions/waitlist';
 
 type WaitlistFormValues = z.infer<typeof waitlistFormSchema>;
 
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [mounted, setMounted] = useState(false);
 
   const form = useForm<WaitlistFormValues>({
     resolver: zodResolver(waitlistFormSchema),
     defaultValues: {
       email: '',
-      acceptedPrivacy: false,
+      consent: false,
     },
   });
 
@@ -47,19 +50,24 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  const onSubmit = (data: WaitlistFormValues) => {
-    const existingEmails = JSON.parse(localStorage.getItem('waitlist') || '[]');
-    existingEmails.push({
-      ...data,
-      timestamp: new Date().toISOString(),
-    });
-    localStorage.setItem('waitlist', JSON.stringify(existingEmails));
+  async function onSubmit(data: WaitlistFormValues) {
+    setErrorMessage('');
+    setIsSubmitted(false);
 
-    setIsSubmitted(true);
-    form.reset();
+    const result = await addToWaitlist(data.email);
+    if (result.success) {
+      setIsSubmitted(true);
+      form.reset();
 
-    setTimeout(() => setIsSubmitted(false), 3000);
-  };
+      setTimeout(() => setIsSubmitted(false), 10000);
+    } else {
+      setErrorMessage(
+        result.error || 'Something went wrong. Please try again.'
+      );
+
+      setTimeout(() => setErrorMessage(''), 10000);
+    }
+  }
 
   const scrollToNextSection = () => {
     const howItWorksSection = document.getElementById('how-it-works');
@@ -360,7 +368,8 @@ export default function Home() {
                           {...field}
                           type='email'
                           placeholder='Enter your email'
-                          className='px-6 py-4 h-auto rounded-md border-2 border-gray-200 text-sec placeholder-gray-400 focus:outline-none focus:border-prim transition-all'
+                          disabled={form.formState.isSubmitting}
+                          className='px-6 py-4 h-auto rounded-md border-2 border-gray-200 text-sec placeholder-gray-400 focus:outline-none focus:border-prim transition-all disabled:opacity-50 disabled:cursor-not-allowed'
                         />
                       </FormControl>
                       <FormMessage />
@@ -370,24 +379,26 @@ export default function Home() {
                 <button
                   type='submit'
                   disabled={
-                    form.formState.isSubmitting ||
-                    !form.watch('acceptedPrivacy')
+                    form.formState.isSubmitting || !form.watch('consent')
                   }
                   className='px-8 py-4 bg-gradient-to-r from-prim to-[#FF8555] text-white font-semibold rounded-md hover:shadow-lg hover:shadow-prim/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 disabled:hover:shadow-none cursor-pointer'>
-                  Join Waitlist
-                  <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
+                  {form.formState.isSubmitting ? 'Joining...' : 'Join Waitlist'}
+                  {!form.formState.isSubmitting && (
+                    <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
+                  )}
                 </button>
               </div>
 
               <FormField
                 control={form.control}
-                name='acceptedPrivacy'
+                name='consent'
                 render={({ field }) => (
                   <FormItem className='mt-4 flex items-start gap-2 text-left space-y-0'>
                     <FormControl>
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
+                        disabled={form.formState.isSubmitting}
                         className='ml-2'
                       />
                     </FormControl>
@@ -397,6 +408,8 @@ export default function Home() {
                         accept the{' '}
                         <Link
                           href='/privacy'
+                          target='_blank'
+                          rel='noopener noreferrer'
                           className='text-prim hover:underline font-medium'>
                           Privacy Policy
                         </Link>
@@ -408,10 +421,21 @@ export default function Home() {
               />
 
               {isSubmitted && (
-                <p className='mt-4 text-acc flex items-center justify-center gap-2'>
-                  <Check className='w-5 h-5' />
-                  You&apos;re on the list! We&apos;ll be in touch soon.
-                </p>
+                <div className='mt-4 p-4 bg-green-50 border border-green-200 rounded-lg'>
+                  <p className='text-green-800 flex items-center justify-center gap-2'>
+                    <Check className='w-5 h-5' />
+                    You&apos;re on the list! We&apos;ll be in touch soon.
+                  </p>
+                </div>
+              )}
+
+              {errorMessage && (
+                <div className='mt-4 p-4 bg-red-50 border border-red-200 rounded-lg'>
+                  <p className='text-red-800 flex items-center justify-center gap-2'>
+                    <AlertCircle className='w-5 h-5' />
+                    {errorMessage}
+                  </p>
+                </div>
               )}
             </form>
           </Form>
