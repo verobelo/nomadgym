@@ -156,9 +156,8 @@ export default function PrivacyPolicy() {
               6. Data Storage and Security
             </h2>
             <p className='text-gray-700 mb-4'>
-              <strong>Storage Location:</strong> Your waitlist data is currently
-              stored locally in your browser (localStorage). When our full
-              service launches, data will be stored on secure servers within the
+              <strong>Storage Location:</strong> Your waitlist data is stored
+              securely in our Appwrite database on secure servers within the
               European Economic Area (EEA) or with service providers that comply
               with GDPR requirements.
             </p>
