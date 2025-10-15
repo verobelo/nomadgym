@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: 'NomadGym',
     images: [
       {
-        url: 'https://www.veronikacodes.com/web-preview.png',
+        url: 'https://www.nomadgym.es/web-preview.png',
         width: 1200,
         height: 630,
         alt: 'NomadGym - Train at Any Gym in Spain',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: 'NomadGym - Train at Any Gym in Spain with a Single Pass',
     description:
       'NomadGym is a centralized gym-platform offering a unified gympass across Spain. Perfect for tourists, digital nomads, and vanlifers.',
-    images: ['https://www.veronikacodes.com/web-preview.png'],
+    images: ['https://www.nomadgym.es/web-preview.png'],
   },
 };
 
