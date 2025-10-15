@@ -30,6 +30,8 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { waitlistFormSchema } from '@/lib/validation';
 import { addToWaitlist } from '@/lib/actions/waitlist';
+import { useLanguage } from '@/context/LanguageContext';
+import LanguageToggle from '@/components/LanguageToggle';
 
 type WaitlistFormValues = z.infer<typeof waitlistFormSchema>;
 
@@ -37,6 +39,7 @@ export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [mounted, setMounted] = useState(false);
+  const { t } = useLanguage();
 
   const form = useForm<WaitlistFormValues>({
     resolver: zodResolver(waitlistFormSchema),
@@ -98,11 +101,14 @@ export default function Home() {
               className='md:hidden h-12 w-12 object-cover'
               priority
             />
-            <div className='inline-flex items-center gap-2 bg-prim/10 border border-acc/20 rounded-sm px-4 py-2'>
-              <Sparkles className='w-4 h-4 text-acc' />
-              <span className='text-prim text-sm md:text-base font-medium'>
-                Coming Soon to Spain
-              </span>
+            <div className='flex items-center gap-3'>
+              <div className='inline-flex items-center gap-2 bg-prim/10 border border-acc/20 rounded-sm px-4 py-2'>
+                <Sparkles className='w-4 h-4 text-acc' />
+                <span className='text-prim text-sm md:text-base font-medium'>
+                  {t('comingSoon')}
+                </span>
+              </div>
+              <LanguageToggle />
             </div>
           </div>
         </div>
@@ -125,16 +131,15 @@ export default function Home() {
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
             <h1 className='text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight'>
-              Your Journey. Your Route.
+              {t('heroTitle1')}
               <br />
               <span className='bg-gradient-to-r from-prim to-acc bg-clip-text text-transparent'>
-                Your Gym.
+                {t('heroTitle2')}
               </span>
             </h1>
 
             <p className='text-xl sm:text-2xl text-neutral mb-8 max-w-2xl mx-auto'>
-              One pass. Unlimited access to partner gyms across Spain. Perfect
-              for tourists, vanlifers, and eternal wanderers.
+              {t('heroSubtitle')}
             </p>
           </div>
         </div>
@@ -148,7 +153,7 @@ export default function Home() {
             <div className='w-3 h-6 bg-gradient-to-r from-prim/80 to-prim rounded-sm group-hover:from-prim group-hover:to-prim transition-all'></div>
           </div>
           <span className='text-white/70 text-xs font-medium group-hover:text-white transition-colors'>
-            Know more
+            {t('knowMore')}
           </span>
         </div>
       </section>
@@ -157,37 +162,34 @@ export default function Home() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-12 sm:mb-16'>
             <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-sec mb-3 sm:mb-4'>
-              How It Works
+              {t('howItWorks')}
             </h2>
             <p className='text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4'>
-              Getting started is simple. Train anywhere in just 3 easy steps.
+              {t('howItWorksSubtitle')}
             </p>
           </div>
 
           <div className='grid md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12'>
-            {[
+            {([
               {
                 icon: CreditCard,
                 step: '01',
-                title: 'Buy Your Entry Pack',
-                description:
-                  'Choose from 5, 10, or 15+ entries. More options are coming.',
+                titleKey: 'step1Title' as const,
+                descriptionKey: 'step1Description' as const,
               },
               {
                 icon: MapPin,
                 step: '02',
-                title: 'Find Gyms Near You',
-                description:
-                  'Browse our network of partner gyms across Spain. Filter by location, amenities, and availability.',
+                titleKey: 'step2Title' as const,
+                descriptionKey: 'step2Description' as const,
               },
               {
                 icon: Dumbbell,
                 step: '03',
-                title: 'Train When You Want',
-                description:
-                  "Show up, scan your pass, and train. It's that simple. No contracts, no hassle.",
+                titleKey: 'step3Title' as const,
+                descriptionKey: 'step3Description' as const,
               },
-            ].map((item, index) => (
+            ] as const).map((item, index) => (
               <div key={index} className='relative group'>
                 <div className='bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8 pt-8 sm:pt-8 rounded-2xl border border-gray-100 hover:border-prim/30 transition-all duration-300 hover:shadow-xl md:hover:-translate-y-2'>
                   <div className='absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-prim to-acc rounded-full flex items-center justify-center text-white text-sm sm:text-base font-bold shadow-lg'>
@@ -199,10 +201,10 @@ export default function Home() {
                   </div>
 
                   <h3 className='text-xl sm:text-2xl font-bold text-sec mb-2 sm:mb-3'>
-                    {item.title}
+                    {t(item.titleKey)}
                   </h3>
                   <p className='text-sm sm:text-base text-gray-600 leading-relaxed'>
-                    {item.description}
+                    {t(item.descriptionKey)}
                   </p>
                 </div>
               </div>
@@ -215,33 +217,31 @@ export default function Home() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-16'>
             <h2 className='text-4xl sm:text-5xl font-bold text-sec mb-4'>
-              Why Choose NomadGym?
+              {t('whyChoose')}
             </h2>
             <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
-              The flexibility you need. The savings you want. The freedom you
-              deserve.
+              {t('whyChooseSubtitle')}
             </p>
           </div>
 
           <div className='grid lg:grid-cols-3 gap-6'>
-            {[
+            {([
               {
                 icon: Sparkles,
-                title: 'Total Flexibility',
-                description: 'Train at any partner gym. No fixed locations.',
+                titleKey: 'flexibility' as const,
+                descriptionKey: 'flexibilityDesc' as const,
               },
               {
                 icon: CreditCard,
-                title: 'Save Money',
-                description: 'Pay less. No expensive monthly memberships.',
+                titleKey: 'saveMoney' as const,
+                descriptionKey: 'saveMoneyDesc' as const,
               },
               {
                 icon: MapPin,
-                title: 'Network of Gyms',
-                description:
-                  'Access hundreds of gyms across Spain. Check gym availability in the gyms list.',
+                titleKey: 'networkGyms' as const,
+                descriptionKey: 'networkGymsDesc' as const,
               },
-            ].map((benefit, index) => (
+            ] as const).map((benefit, index) => (
               <div
                 key={index}
                 className='bg-white p-6 rounded-2xl border border-gray-100 hover:border-prim/30 hover:shadow-xl transition-all duration-300 group'>
@@ -249,10 +249,10 @@ export default function Home() {
                   <benefit.icon className='w-6 h-6 text-prim' />
                 </div>
                 <h3 className='text-xl font-bold text-sec mb-2'>
-                  {benefit.title}
+                  {t(benefit.titleKey)}
                 </h3>
                 <p className='text-gray-600 text-sm leading-relaxed'>
-                  {benefit.description}
+                  {t(benefit.descriptionKey)}
                 </p>
               </div>
             ))}
@@ -267,48 +267,44 @@ export default function Home() {
               <div className='inline-flex items-center gap-2 bg-acc/10 border border-acc/20 rounded-full px-4 py-2 mb-6'>
                 <Users className='w-4 h-4 text-acc' />
                 <span className='text-acc text-sm font-medium'>
-                  For Gym Owners
+                  {t('forGymOwners')}
                 </span>
               </div>
 
               <h2 className='text-4xl sm:text-5xl font-bold mb-6'>
-                Grow Your Gym with <span className='text-prim'>NomadGym</span>
+                {t('growYourGym')} <span className='text-prim'>NomadGym</span>
               </h2>
               <p className='text-xl text-gray-300 mb-8 leading-relaxed'>
-                Join our network and attract a new wave of fitness enthusiasts.
-                Perfect for filling off-peak hours and reaching travelers.
+                {t('growYourGymSubtitle')}
               </p>
 
               <div className='space-y-6 mb-8'>
-                {[
+                {([
                   {
                     icon: Users,
-                    title: 'Attract New Customers',
-                    description:
-                      'Reach tourists, digital nomads, and vanlifers exploring Spain.',
+                    titleKey: 'attractCustomers' as const,
+                    descriptionKey: 'attractCustomersDesc' as const,
                   },
                   {
                     icon: Clock,
-                    title: 'Fill Off-Peak Hours',
-                    description:
-                      "Maximize your gym's capacity during quieter times of the day.",
+                    titleKey: 'fillOffPeak' as const,
+                    descriptionKey: 'fillOffPeakDesc' as const,
                   },
                   {
                     icon: TrendingUp,
-                    title: 'No Risk, Pay Per Use',
-                    description:
-                      'Only pay for actual visits. No upfront costs or commitments.',
+                    titleKey: 'noRisk' as const,
+                    descriptionKey: 'noRiskDesc' as const,
                   },
-                ].map((item, index) => (
+                ] as const).map((item, index) => (
                   <div key={index} className='flex gap-4'>
                     <div className='flex-shrink-0 w-12 h-12 bg-gradient-to-br from-prim/20 to-acc/20 rounded-xl flex items-center justify-center'>
                       <item.icon className='w-6 h-6 text-acc' />
                     </div>
                     <div>
                       <h3 className='text-lg font-semibold mb-1'>
-                        {item.title}
+                        {t(item.titleKey)}
                       </h3>
-                      <p className='text-gray-400'>{item.description}</p>
+                      <p className='text-gray-400'>{t(item.descriptionKey)}</p>
                     </div>
                   </div>
                 ))}
@@ -317,7 +313,7 @@ export default function Home() {
               <a
                 href='mailto:infonomadgym@gmail.com'
                 className='inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-acc to-[#00F0D0] text-sec font-semibold rounded-full hover:shadow-lg hover:shadow-acc/50 transform hover:scale-105 transition-all duration-300 group'>
-                Partner My Gym
+                {t('partnerMyGym')}
                 <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
               </a>
             </div>
@@ -347,10 +343,10 @@ export default function Home() {
       <section className='py-24 bg-white'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
           <h2 className='text-4xl sm:text-5xl font-bold text-sec mb-6'>
-            Ready to Start Your Fitness Journey?
+            {t('readyToStart')}
           </h2>
           <p className='text-xl text-gray-600 mb-10'>
-            Join the waitlist and be the first to know when we launch in Spain.
+            {t('joinWaitlist')}
           </p>
 
           <Form {...form}>
@@ -367,7 +363,7 @@ export default function Home() {
                         <Input
                           {...field}
                           type='email'
-                          placeholder='Enter your email'
+                          placeholder={t('enterEmail')}
                           disabled={form.formState.isSubmitting}
                           className='px-6 py-4 h-auto rounded-md border-2 border-gray-200 text-sec placeholder-gray-400 focus:outline-none focus:border-prim transition-all disabled:opacity-50 disabled:cursor-not-allowed'
                         />
@@ -382,7 +378,7 @@ export default function Home() {
                     form.formState.isSubmitting || !form.watch('consent')
                   }
                   className='px-8 py-4 bg-gradient-to-r from-prim to-[#FF8555] text-white font-semibold rounded-md hover:shadow-lg hover:shadow-prim/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 disabled:hover:shadow-none cursor-pointer'>
-                  {form.formState.isSubmitting ? 'Joining...' : 'Join Waitlist'}
+                  {form.formState.isSubmitting ? t('joining') : t('joinWaitlistBtn')}
                   {!form.formState.isSubmitting && (
                     <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
                   )}
@@ -404,14 +400,13 @@ export default function Home() {
                     </FormControl>
                     <div className='space-y-1 leading-none'>
                       <label className='text-sm text-gray-600 cursor-pointer'>
-                        I agree to receive information about NomadGym launch and
-                        accept the{' '}
+                        {t('consentText')}{' '}
                         <Link
                           href='/privacy'
                           target='_blank'
                           rel='noopener noreferrer'
                           className='text-prim hover:underline font-medium'>
-                          Privacy Policy
+                          {t('privacyPolicy')}
                         </Link>
                       </label>
                       <FormMessage />
@@ -424,7 +419,7 @@ export default function Home() {
                 <div className='mt-4 p-4 bg-green-50 border border-green-200 rounded-lg'>
                   <p className='text-green-800 flex items-center justify-center gap-2'>
                     <Check className='w-5 h-5' />
-                    You&apos;re on the list! We&apos;ll be in touch soon.
+                    {t('successMessage')}
                   </p>
                 </div>
               )}
@@ -456,13 +451,12 @@ export default function Home() {
                 />
               </div>
               <p className='text-gray-400'>
-                Train at any gym in Spain with a single pass. Perfect for
-                travelers and digital nomads.
+                {t('trainAnywhere')}
               </p>
             </div>
 
             <div>
-              <h3 className='text-lg font-semibold mb-4'>Contact</h3>
+              <h3 className='text-lg font-semibold mb-4'>{t('contact')}</h3>
               <a
                 href='mailto:gyms@nomadgym.es'
                 className='flex items-center gap-2 text-gray-400 hover:text-prim transition-colors mt-2'>
@@ -473,7 +467,7 @@ export default function Home() {
 
             <div>
               <h3 className='text-lg font-semibold mb-4'>
-                Follow us on{' '}
+                {t('followUs')}{' '}
                 <Link
                   href='https://www.linkedin.com/company/nomadgym'
                   className='underline hover:text-prim'>
@@ -502,7 +496,7 @@ export default function Home() {
           </div>
           <div className='border-t border-white/10 pt-8 text-center text-gray-400'>
             <p>
-              &copy; {new Date().getFullYear()} NomadGym. All rights reserved.
+              &copy; {new Date().getFullYear()} NomadGym. {t('allRights')}
             </p>
           </div>
         </div>
