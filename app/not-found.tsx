@@ -54,7 +54,7 @@ export default function NotFound() {
               size='lg'
               className='bg-gradient-to-r from-prim to-acc hover:from-prim/90 hover:to-acc/90 text-white'>
               <Link href='/'>
-                <Home className='w-5 h-5 mr-2' />
+                <Home className='w-5 h-5' />
                 {t('goHome')}
               </Link>
             </Button>
@@ -66,7 +66,7 @@ export default function NotFound() {
               className='border-gray-300 text-sec hover:bg-gray-50'
               onClick={() => window.history.back()}>
               <button>
-                <ArrowLeft className='w-5 h-5 mr-2' />
+                <ArrowLeft className='w-5 h-5' />
                 {t('goBack')}
               </button>
             </Button>
