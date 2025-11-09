@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import userEvent from '@testing-library/user-event';
-import LanguageToggle from '../components/LanguageToggle';
+import LanguageToggle from '@/components/LanguageToggle';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 describe('LanguageToggle', () => {

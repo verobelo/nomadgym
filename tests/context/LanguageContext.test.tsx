@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import '@testing-library/jest-dom/vitest';
-import { useLanguage, LanguageProvider } from '../context/LanguageContext';
+import { useLanguage, LanguageProvider } from '@/context/LanguageContext';
 import { renderHook, act } from '@testing-library/react';
 
 describe('useLanguage', () => {
