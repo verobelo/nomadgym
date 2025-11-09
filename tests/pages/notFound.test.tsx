@@ -5,24 +5,25 @@ import NotFound from '@/app/not-found';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 describe('NotFound', () => {
-  it('should have a heading of level 1', () => {
+  const renderNotFoundComponent = () => {
     render(
       <LanguageProvider>
         <NotFound />
       </LanguageProvider>
     );
-    const heading = screen.getByRole('heading', { level: 1 });
+    return {
+      heading: screen.getByRole('heading', { level: 1 }),
+      backButton: screen.getByRole('button', { name: /back/i }),
+    };
+  };
+
+  it('should have a heading of level 1', () => {
+    const { heading } = renderNotFoundComponent();
     expect(heading).toBeInTheDocument();
   });
 
   it('should call window.history.back when back button is clicked', () => {
-    render(
-      <LanguageProvider>
-        <NotFound />
-      </LanguageProvider>
-    );
-
-    const backButton = screen.getByRole('button', { name: /back/i });
+    const { backButton } = renderNotFoundComponent();
     expect(backButton).toBeInTheDocument();
 
     const goBack = vi.spyOn(window.history, 'back');
