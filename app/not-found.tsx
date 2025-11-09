@@ -45,9 +45,7 @@ export default function NotFound() {
           <h2 className='text-3xl sm:text-4xl font-bold text-sec mb-4'>
             {t('notFoundTitle')}
           </h2>
-          <p className='text-gray-600 text-lg mb-8'>
-            {t('notFoundMessage')}
-          </p>
+          <p className='text-gray-600 text-lg mb-8'>{t('notFoundMessage')}</p>
 
           {/* Action Buttons */}
           <div className='flex flex-col sm:flex-row gap-4 justify-center'>
