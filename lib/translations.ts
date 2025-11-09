@@ -69,6 +69,17 @@ export const translations = {
     contact: 'Contact',
     followUs: 'Follow us on',
     allRights: 'All rights reserved.',
+
+    // Not Found Page
+    notFoundTitle: 'Page Not Found',
+    notFoundMessage:
+      "Oops! The page you're looking for doesn't exist. It might have been moved or deleted.",
+    goHome: 'Go Home',
+    goBack: 'Go Back',
+    lookingForSomething: 'Looking for something specific?',
+    clientDashboard: 'Client Dashboard',
+    findGyms: 'Find Gyms',
+    support: 'Support',
   },
   es: {
     // Nav
@@ -142,6 +153,17 @@ export const translations = {
     contact: 'Contacto',
     followUs: 'Síguenos en',
     allRights: 'Todos los derechos reservados.',
+
+    // Not Found Page
+    notFoundTitle: 'Página no encontrada',
+    notFoundMessage:
+      '¡Ups! La página que buscas no existe. Puede que haya sido movida o eliminada.',
+    goHome: 'Ir al Inicio',
+    goBack: 'Volver',
+    lookingForSomething: '¿Buscas algo específico?',
+    clientDashboard: 'Panel del Cliente',
+    findGyms: 'Buscar Gimnasios',
+    support: 'Soporte',
   },
 } as const;
 
